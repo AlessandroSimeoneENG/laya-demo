@@ -72,7 +72,7 @@ Per ogni caso di test e per ciascuna domanda configurata, lo script stampa la de
 Non serve modificare il codice Python per provare nuovi scenari:
 
 1. Apri **`prompts.json`**.
-2. Aggiungi nuove frasi nell'array `"test_cases"` oppure modifica le regole nella sezione `"questions"`.
+2. Aggiungi un nuovo blocco `{ "state": "...", "questions": { ... } }` alla lista oppure modifica un caso esistente.
 3. Rilancia:
    ```bash
    python run_test.py
