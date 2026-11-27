@@ -1,36 +1,70 @@
-{
-  "questions": {
-    "confidenzialita": {
-      "type": "choice",
-      "instructions": "Valuta il rischio per la confidenzialità (accesso non autorizzato o fuga di dati sensibili/personali)",
-      "criteria": {
-        "alto": "Impatto critico: esposizione di dati personali sensibili, finanziari o segreti aziendali",
-        "medio": "Impatto moderato: esposizione di dati interni non pubblici ma non strettamente sensibili",
-        "basso": "Impatto trascurabile: dati pubblici o a bassissima sensibilità"
-      }
-    },
-    "integrita": {
-      "type": "choice",
-      "instructions": "Valuta il rischio per l'integrità (alterazione, corruzione o manomissione non autorizzata dei dati)",
-      "criteria": {
-        "alto": "Impatto critico: alterazione di dati contabili, contrattuali o critici con gravi conseguenze legali o operative",
-        "medio": "Impatto moderato: modifiche non autorizzate rilevabili e ripristinabili con effort contenuto",
-        "basso": "Impatto trascurabile: dati facilmente ricreabili o di scarso impatto operativo"
-      }
-    },
-    "disponibilita": {
-      "type": "choice",
-      "instructions": "Valuta il rischio per la disponibilità (interruzione del servizio o inaccessibilità del sistema)",
-      "criteria": {
-        "alto": "Impatto critico: blocco di processi aziendali essenziali o fermi operativi immediati",
-        "medio": "Impatto moderato: rallentamenti o disservizi gestibili temporaneamente con workaround",
-        "basso": "Impatto trascurabile: servizio non urgente, tollerabile un fermo prolungato"
+[
+  {
+    "state": "Asset: software gestionale SAS delle buste paga dei dipendenti dell'azienda non aggiornato da 3 anni.",
+    "questions": {
+      "confidenzialita": {
+        "type": "choice",
+        "instructions": "Valuta il rischio per la confidenzialità",
+        "criteria": {
+          "alto": "Impatto critico: esposizione di dati personali sensibili, finanziari o segreti aziendali",
+          "medio": "Impatto moderato: esposizione di dati interni non pubblici ma non strettamente sensibili",
+          "basso": "Impatto trascurabile: dati pubblici o a bassissima sensibilità"
+        }
+      },
+      "integrita": {
+        "type": "choice",
+        "instructions": "Valuta il rischio per l'integrità",
+        "criteria": {
+          "alto": "Impatto critico: alterazione di dati contabili, contrattuali o critici con gravi conseguenze legali o operative",
+          "medio": "Impatto moderato: modifiche non autorizzate rilevabili e ripristinabili con effort contenuto",
+          "basso": "Impatto trascurabile: dati facilmente ricreabili o di scarso impatto operativo"
+        }
+      },
+      "disponibilita": {
+        "type": "choice",
+        "instructions": "Valuta il rischio per la disponibilità",
+        "criteria": {
+          "alto": "Impatto critico: blocco di processi aziendali essenziali o fermi operativi immediati",
+          "medio": "Impatto moderato: rallentamenti o disservizi gestibili temporaneamente con workaround",
+          "basso": "Impatto trascurabile: servizio non urgente, tollerabile un fermo prolungato"
+        }
       }
     }
   },
-  "test_cases": [
-    "Asset: software gestionale SAS delle buste paga dei dipendenti dell'azienda non aggiornato da 3 anni.",
-    "Asset: sito web vetrina aziendale ospitato su server gestito con backup giornalieri automatici.",
-    "Asset: database centrale dei clienti in produzione privo di ridondanza e senza piano di disaster recovery."
-  ]
-}
+  {
+    "state": "Asset: Applicazione web e-commerce esposta su Internet con vulnerabilità SQL Injection (CVE-2023-XXXX).",
+    "questions": {
+      "cvss_severity_score": {
+        "type": "score",
+        "instructions": "Assegna il livello di gravità (severity) basato sul CVSS, dove 0 è Nessuno e 4 è Critico.",
+        "criteria": [
+          "Score 0: Nessuna vulnerabilità rilevata",
+          "Score 1: Basso (CVSS 0.1 - 3.9)",
+          "Score 2: Medio (CVSS 4.0 - 6.9)",
+          "Score 3: Alto (CVSS 7.0 - 8.9)",
+          "Score 4: Critico (CVSS 9.0 - 10.0)"
+        ]
+      },
+      "asset_criticality_score": {
+        "type": "score",
+        "instructions": "Assegna un punteggio per la criticità di business dell'asset da 0 a 3.",
+        "criteria": [
+          "Score 0: Trascurabile (Es. ambiente di test)",
+          "Score 1: Basso (Servizi interni secondari)",
+          "Score 2: Medio/Alto (Servizi operativi importanti)",
+          "Score 3: Mission Critical (E-commerce, fatturazione, blocca il business se cade)"
+        ]
+      },
+      "probabilita_sfruttamento_score": {
+        "type": "score",
+        "instructions": "Valuta la probabilità di sfruttamento attivo della vulnerabilità.",
+        "criteria": [
+          "Score 0: Puramente teorica, nessun exploit",
+          "Score 1: Esiste un Proof of Concept ma non è funzionale",
+          "Score 2: Exploit pubblico disponibile ma richiede autenticazione o setup complesso",
+          "Score 3: Sfruttamento attivo 'in the wild' senza autenticazione"
+        ]
+      }
+    }
+  }
+]
