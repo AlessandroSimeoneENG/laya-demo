@@ -20,3 +20,27 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
    ```bash
    git clone [https://github.com/](https://github.com/)<TUO-UTENTE>/laya-demo.git
    cd laya-demo
+   
+2. **Crea e attiva un ambiente virtuale Python:**
+   * **Linux / macOS / WSL:**
+     ```bash
+     python3 -m venv .venv
+     source .venv/bin/activate
+     ```
+   * **Windows (PowerShell):**
+     ```powershell
+     python -m venv .venv
+     .venv\Scripts\Activate.ps1
+     ```
+
+3. **Installa le dipendenze:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Esegui lo script di test con i prompt preconfigurati:**
+   ```bash
+   python run_test.py
+   ```
+   *(Nota: la prima esecuzione richiederà qualche decina di secondi per scaricare i pesi del modello; le esecuzioni successive saranno immediate).*
+   
