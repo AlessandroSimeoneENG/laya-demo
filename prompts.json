@@ -1,0 +1,36 @@
+{
+  "questions": {
+    "confidenzialita": {
+      "type": "choice",
+      "instructions": "Valuta il rischio per la confidenzialità (accesso non autorizzato o fuga di dati sensibili/personali)",
+      "criteria": {
+        "alto": "Impatto critico: esposizione di dati personali sensibili, finanziari o segreti aziendali",
+        "medio": "Impatto moderato: esposizione di dati interni non pubblici ma non strettamente sensibili",
+        "basso": "Impatto trascurabile: dati pubblici o a bassissima sensibilità"
+      }
+    },
+    "integrita": {
+      "type": "choice",
+      "instructions": "Valuta il rischio per l'integrità (alterazione, corruzione o manomissione non autorizzata dei dati)",
+      "criteria": {
+        "alto": "Impatto critico: alterazione di dati contabili, contrattuali o critici con gravi conseguenze legali o operative",
+        "medio": "Impatto moderato: modifiche non autorizzate rilevabili e ripristinabili con effort contenuto",
+        "basso": "Impatto trascurabile: dati facilmente ricreabili o di scarso impatto operativo"
+      }
+    },
+    "disponibilita": {
+      "type": "choice",
+      "instructions": "Valuta il rischio per la disponibilità (interruzione del servizio o inaccessibilità del sistema)",
+      "criteria": {
+        "alto": "Impatto critico: blocco di processi aziendali essenziali o fermi operativi immediati",
+        "medio": "Impatto moderato: rallentamenti o disservizi gestibili temporaneamente con workaround",
+        "basso": "Impatto trascurabile: servizio non urgente, tollerabile un fermo prolungato"
+      }
+    }
+  },
+  "test_cases": [
+    "Asset: software gestionale SAS delle buste paga dei dipendenti dell'azienda non aggiornato da 3 anni.",
+    "Asset: sito web vetrina aziendale ospitato su server gestito con backup giornalieri automatici.",
+    "Asset: database centrale dei clienti in produzione privo di ridondanza e senza piano di disaster recovery."
+  ]
+}
