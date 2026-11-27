@@ -66,5 +66,22 @@
         ]
       }
     }
+  },
+  {
+    "state": "Allarme SIEM: Rilevata massiccia scansione delle porte su server interno. L'indagine ha confermato che l'IP sorgente appartiene allo scanner di vulnerabilità aziendale (Falso Positivo).",
+    "questions": {
+      "falso_positivo": {
+        "type": "noul",
+        "instructions": "L'evento è un falso positivo generato da un'attività autorizzata?"
+      },
+      "richiede_mitigazione": {
+        "type": "noul",
+        "instructions": "È necessario applicare azioni di mitigazione tecnica sull'asset coinvolto?"
+      },
+      "chiudere_ticket": {
+        "type": "noul",
+        "instructions": "Il ticket può essere chiuso direttamente senza ulteriori indagini?"
+      }
+    }
   }
 ]
