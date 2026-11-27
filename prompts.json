@@ -34,29 +34,29 @@
     }
   },
   {
-    "titolo": "2. Tipo SCORE — Valutazione continua su scala ordinale",
-    "spiegazione": "Restituisce un punteggio numerico continuo lungo la scala definita nei criteri.",
+    "titolo": "2. Tipo SCORE — Valutazione su scala ordinale",
+    "spiegazione": "Assegna un livello intero lungo la scala ordinale definita nei criteri (da 0 al livello massimo).",
     "state": "Asset: Portale e-commerce B2C principale dell'azienda esposto su Internet, utilizzato per tutti gli ordini e pagamenti online. Rilevata vulnerabilità critica di SQL Injection non autenticata con exploit pubblico attivo che consente l'accesso completo al database clienti.",
     "questions": {
       "cvss_severity_score": {
         "type": "score",
-        "instructions": "Valuta la gravità tecnica della vulnerabilità su una scala da 0 (nessuna) a 4 (critica).",
+        "instructions": "Valuta la gravità tecnica della vulnerabilità dal livello nullo al livello critico.",
         "criteria": [
-          "0: Nessuna vulnerabilità rilevata",
-          "1: Bassa gravità, impatto minimo e sfruttamento difficile",
-          "2: Media gravità, richiede privilegi o condizioni specifiche",
-          "3: Alta gravità, impatto significativo su dati o servizi",
-          "4: Gravità critica, compromissione totale da remoto senza autenticazione"
+          "Nessuna vulnerabilità rilevata",
+          "Bassa gravità, impatto minimo e sfruttamento difficile",
+          "Media gravità, richiede privilegi o condizioni specifiche",
+          "Alta gravità, impatto significativo su dati o servizi",
+          "Gravità critica, compromissione totale da remoto senza autenticazione"
         ]
       },
       "asset_criticality_score": {
         "type": "score",
-        "instructions": "Valuta la criticità di business dell'asset su una scala da 0 (trascurabile) a 3 (mission critical).",
+        "instructions": "Valuta la criticità di business dell'asset da trascurabile a mission critical.",
         "criteria": [
-          "0: Ambiente di test o sviluppo senza impatto sul business",
-          "1: Servizio interno secondario",
-          "2: Servizio operativo importante ma con alternative temporanee",
-          "3: Asset mission critical che genera fatturato diretto e blocca il business se indisponibile"
+          "Ambiente di test o sviluppo senza impatto sul business",
+          "Servizio interno secondario",
+          "Servizio operativo importante ma con alternative temporanee",
+          "Asset mission critical che genera fatturato diretto e blocca il business se indisponibile"
         ]
       }
     }
@@ -64,19 +64,19 @@
   {
     "titolo": "3. Tipo NOUL — Decisione binaria Sì/No",
     "spiegazione": "Restituisce la probabilità da 0.00 (No) a 1.00 (Sì) per una domanda chiusa.",
-    "state": "Allarme SIEM: Rilevata scansione massiccia delle porte verso i server interni. La verifica sull'IP sorgente ha confermato che il traffico proviene dallo scanner di vulnerabilità autorizzato del team IT durante la finestra di manutenzione programmata.",
+    "state": "Log SIEM: Attività di audit programmata eseguita dall'indirizzo IP interno dello scanner aziendale Nessus autorizzato dal team Security durante la finestra di manutenzione notturna.",
     "questions": {
-      "falso_positivo": {
+      "attivita_autorizzata": {
         "type": "noul",
-        "instructions": "L'allarme è un falso positivo causato da un'attività interna autorizzata?"
+        "instructions": "L'attività rilevata nei log è stata autorizzata dal team interno?"
       },
-      "attacco_esterno": {
+      "in_finestra_manutenzione": {
         "type": "noul",
-        "instructions": "Il traffico proviene da un attaccante esterno non autorizzato?"
+        "instructions": "L'evento si è verificato durante una finestra di manutenzione programmata?"
       },
       "richiede_intervento_emergenza": {
         "type": "noul",
-        "instructions": "È necessario isolare immediatamente i server dalla rete per un incidente di sicurezza?"
+        "instructions": "È necessario isolare i server dalla rete per un'emergenza?"
       }
     }
   }

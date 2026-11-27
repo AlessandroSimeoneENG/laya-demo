@@ -1,6 +1,6 @@
 # laya-demo
 
-Guida rapida e set di prompt preconfigurati per installare e testare in locale il decision engine **[laya](https://github.com/NandhaKishorM/laya)** (modello multilingue) sui nostri casi d'uso.
+Guida rapida e set di prompt preconfigurati per installare e testare in locale il decision engine **[laya](https://github.com/NandhaKishorM/laya)** sui nostri casi d'uso.
 
 Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene inviato a servizi esterni.
 
@@ -9,8 +9,8 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
 ## Prerequisiti
 
 * **Python 3.10** o superiore
-* Circa **2 GB di RAM** liberi (l'encoder multilingue gira rapidamente anche solo su CPU, senza bisogno di GPU dedicata)
-* Connessione internet **solo al primo avvio** per scaricare automaticamente i pesi di `convaiinnovations/laya-multilingual` da Hugging Face
+* Circa **3–4 GB di RAM** liberi (il motore di default usa un reader compatto da `0.8B` che gira anche solo su CPU, senza bisogno di GPU dedicata)
+* Connessione internet **solo al primo avvio** per scaricare automaticamente i pesi del modello da Hugging Face (~1.7 GB)
 
 ---
 
@@ -18,7 +18,7 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
 
 1. **Clona questa repository e entra nella cartella:**
    ```bash
-   git clone https://github.com/AlessandroSimeoneENG/laya-demo.git
+   git clone [https://github.com/](https://github.com/)<TUO-UTENTE>/laya-demo.git
    cd laya-demo
    ```
 
@@ -43,17 +43,22 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
    ```bash
    python run_test.py
    ```
-   *(Nota: la prima esecuzione richiederà qualche secondo per scaricare i pesi del modello; le esecuzioni successive saranno immediate).*
+   *(Nota: la prima esecuzione richiederà qualche decina di secondi per scaricare i pesi del modello; le esecuzioni successive saranno immediate).*
 
 ---
 
 ## Come leggere l'output
 
-Per ogni scenario di test, lo script stampa l'esito delle tre tipologie di decisione supportate da `laya`, affiancate dall'indice di **confidenza** del modello:
+Per ogni scenario di test, lo script stampa l'esito delle tre tipologie di decisione supportate da `laya`:
 
-* **`[CHOICE]`**: restituisce l'etichetta scelta tra le opzioni disponibili.
-* **`[SCORE]`**: restituisce un punteggio numerico continuo lungo la scala ordinale definita nei criteri.
+* **`[CHOICE]`**: sceglie l'etichetta più adatta tra le opzioni disponibili.
+* **`[SCORE]`**: assegna un livello intero lungo la scala ordinale definita nei criteri (da `0` al livello massimo).
 * **`[NOUL]`**: restituisce un esito binario (`SÌ` / `NO`) insieme alla probabilità stimata (da `0.00` a `1.00`).
+
+Ogni risposta è accompagnata dall'**azione consigliata** (`auto` o `review`), calcolata dal motore in base al grado di incertezza interna senza dover impostare soglie manuali:
+
+* **`auto` (Gestione automatica):** Il modello è sicuro della risposta; il caso può essere gestito direttamente in autonomia dal sistema.
+* **`review` (Revisione manuale):** Il caso è ambiguo o il modello ritiene plausibili più opzioni contemporaneamente; è consigliato l'intervento di un operatore umano (o di un modello più grande).
 
 ---
 
@@ -61,8 +66,8 @@ Per ogni scenario di test, lo script stampa l'esito delle tre tipologie di decis
 
 * `README.md` — Questa guida.
 * `requirements.txt` — Dipendenze Python necessarie (`laya>=0.5.0`).
-* `prompts.json` — Contiene le domande/criteri di classificazione (`choice`, `score`, `noul`) e i testi di esempio in italiano su cui testarli.
-* `run_test.py` — Script che inizializza `laya.Agent("convaiinnovations/laya-multilingual")`, legge `prompts.json` e stampa a schermo le decisioni e l'azione consigliata.
+* `prompts.json` — Lista di scenari di test in italiano; ogni oggetto contiene il contesto da analizzare (`"state"`) e le relative domande/criteri di valutazione (`"questions"` di tipo `choice`, `score` e `noul`).
+* `run_test.py` — Script che inizializza `laya.Agent()`, legge `prompts.json` e stampa a schermo le decisioni e l'azione consigliata.
 
 ---
 
@@ -71,7 +76,7 @@ Per ogni scenario di test, lo script stampa l'esito delle tre tipologie di decis
 Non serve modificare il codice Python per provare nuovi scenari:
 
 1. Apri **`prompts.json`**.
-2. Aggiungi un nuovo blocco `{ "state": "...", "questions": { ... } }` alla lista oppure modifica un caso esistente.
+2. Aggiungi un nuovo blocco `{ "titolo": "...", "spiegazione": "...", "state": "...", "questions": { ... } }` alla lista oppure modifica un caso esistente.
 3. Rilancia:
    ```bash
    python run_test.py
