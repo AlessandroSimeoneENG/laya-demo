@@ -18,7 +18,7 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
 
 1. **Clona questa repository e entra nella cartella:**
    ```bash
-   git clone [https://github.com/](https://github.com/)<TUO-UTENTE>/laya-demo.git
+   git clone https://github.com/AlessandroSimeoneENG/laya-demo.git
    cd laya-demo
    ```
 
