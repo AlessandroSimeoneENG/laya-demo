@@ -49,12 +49,11 @@ Tutto viene eseguito **100% in locale** sulla tua macchina: nessun dato viene in
 
 ## Come leggere l'output
 
-Per ogni caso di test e per ciascuna domanda configurata, lo script stampa la decisione del modello accompagnata dall'**azione consigliata** (`auto` o `review`), calcolata in base al grado di incertezza interna senza dover impostare soglie manuali:
+Per ogni scenario di test, lo script stampa l'esito delle tre tipologie di decisione supportate da `laya`, affiancate dall'indice di **confidenza** del modello:
 
-* **`auto` (Gestione automatica):** Il modello è sicuro della risposta; il caso può essere gestito direttamente in autonomia dal sistema.
-* **`review` (Revisione manuale):** Il caso è ambiguo o il modello ritiene plausibili più opzioni contemporaneamente; è consigliato l'intervento di un operatore umano (o di un modello più grande).
-
-*(Nota: se per una specifica domanda il modello base non calcola il routing, verrà mostrato `n/a`).*
+* **`[CHOICE]`**: restituisce l'etichetta scelta tra le opzioni disponibili.
+* **`[SCORE]`**: restituisce un punteggio numerico continuo lungo la scala ordinale definita nei criteri.
+* **`[NOUL]`**: restituisce un esito binario (`SÌ` / `NO`) insieme alla probabilità stimata (da `0.00` a `1.00`).
 
 ---
 

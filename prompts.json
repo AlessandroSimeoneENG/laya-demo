@@ -1,86 +1,82 @@
 [
   {
-    "state": "Asset: software gestionale SAS delle buste paga dei dipendenti dell'azienda non aggiornato da 3 anni.",
+    "titolo": "1. Tipo CHOICE — Classificazione tra categorie fisse (Triade CIA)",
+    "spiegazione": "Sceglie un'unica etichetta tra opzioni mutuamente esclusive.",
+    "state": "Asset: Software gestionale delle buste paga che contiene dati anagrafici, stipendi, IBAN e codici fiscali di tutti i dipendenti. Il sistema non riceve patch di sicurezza da 3 anni ed è accessibile dalla rete interna senza autenticazione a due fattori.",
     "questions": {
       "confidenzialita": {
         "type": "choice",
-        "instructions": "Valuta il rischio per la confidenzialità",
+        "instructions": "Qual è il rischio di esposizione non autorizzata di dati riservati o personali?",
         "criteria": {
-          "alto": "Impatto critico: esposizione di dati personali sensibili, finanziari o segreti aziendali",
-          "medio": "Impatto moderato: esposizione di dati interni non pubblici ma non strettamente sensibili",
-          "basso": "Impatto trascurabile: dati pubblici o a bassissima sensibilità"
+          "alto": "Dati altamente sensibili, finanziari o personali (stipendi, IBAN, dati sanitari) la cui fuga comporta gravi violazioni GDPR",
+          "medio": "Dati aziendali interni non pubblici ma privi di informazioni personali critiche",
+          "basso": "Informazioni pubbliche o prive di impatto in caso di divulgazione"
         }
       },
       "integrita": {
         "type": "choice",
-        "instructions": "Valuta il rischio per l'integrità",
+        "instructions": "Qual è il rischio in caso di alterazione o manomissione non autorizzata dei dati?",
         "criteria": {
-          "alto": "Impatto critico: alterazione di dati contabili, contrattuali o critici con gravi conseguenze legali o operative",
-          "medio": "Impatto moderato: modifiche non autorizzate rilevabili e ripristinabili con effort contenuto",
-          "basso": "Impatto trascurabile: dati facilmente ricreabili o di scarso impatto operativo"
+          "alto": "Alterazione di importi finanziari, bonifici o dati contrattuali con danno economico o legale diretto",
+          "medio": "Modifiche operative rilevabili e ripristinabili facilmente tramite backup",
+          "basso": "Dati temporanei o facilmente ricostruibili senza impatto"
         }
       },
       "disponibilita": {
         "type": "choice",
-        "instructions": "Valuta il rischio per la disponibilità",
+        "instructions": "Qual è l'impatto operativo se il software resta offline per 24 ore?",
         "criteria": {
-          "alto": "Impatto critico: blocco di processi aziendali essenziali o fermi operativi immediati",
-          "medio": "Impatto moderato: rallentamenti o disservizi gestibili temporaneamente con workaround",
-          "basso": "Impatto trascurabile: servizio non urgente, tollerabile un fermo prolungato"
+          "alto": "Blocco immediato delle operazioni quotidiane critiche e dell'erogazione dei servizi ai clienti",
+          "medio": "Disagio operativo gestibile temporaneamente, poiché il sistema viene usato solo a fine mese",
+          "basso": "Nessun impatto significativo sulle attività aziendali"
         }
       }
     }
   },
   {
-    "state": "Asset: Applicazione web e-commerce esposta su Internet con vulnerabilità SQL Injection (CVE-2023-XXXX).",
+    "titolo": "2. Tipo SCORE — Valutazione continua su scala ordinale",
+    "spiegazione": "Restituisce un punteggio numerico continuo lungo la scala definita nei criteri.",
+    "state": "Asset: Portale e-commerce B2C principale dell'azienda esposto su Internet, utilizzato per tutti gli ordini e pagamenti online. Rilevata vulnerabilità critica di SQL Injection non autenticata con exploit pubblico attivo che consente l'accesso completo al database clienti.",
     "questions": {
       "cvss_severity_score": {
         "type": "score",
-        "instructions": "Assegna il livello di gravità (severity) basato sul CVSS, dove 0 è Nessuno e 4 è Critico.",
+        "instructions": "Valuta la gravità tecnica della vulnerabilità su una scala da 0 (nessuna) a 4 (critica).",
         "criteria": [
-          "Score 0: Nessuna vulnerabilità rilevata",
-          "Score 1: Basso (CVSS 0.1 - 3.9)",
-          "Score 2: Medio (CVSS 4.0 - 6.9)",
-          "Score 3: Alto (CVSS 7.0 - 8.9)",
-          "Score 4: Critico (CVSS 9.0 - 10.0)"
+          "0: Nessuna vulnerabilità rilevata",
+          "1: Bassa gravità, impatto minimo e sfruttamento difficile",
+          "2: Media gravità, richiede privilegi o condizioni specifiche",
+          "3: Alta gravità, impatto significativo su dati o servizi",
+          "4: Gravità critica, compromissione totale da remoto senza autenticazione"
         ]
       },
       "asset_criticality_score": {
         "type": "score",
-        "instructions": "Assegna un punteggio per la criticità di business dell'asset da 0 a 3.",
+        "instructions": "Valuta la criticità di business dell'asset su una scala da 0 (trascurabile) a 3 (mission critical).",
         "criteria": [
-          "Score 0: Trascurabile (Es. ambiente di test)",
-          "Score 1: Basso (Servizi interni secondari)",
-          "Score 2: Medio/Alto (Servizi operativi importanti)",
-          "Score 3: Mission Critical (E-commerce, fatturazione, blocca il business se cade)"
-        ]
-      },
-      "probabilita_sfruttamento_score": {
-        "type": "score",
-        "instructions": "Valuta la probabilità di sfruttamento attivo della vulnerabilità.",
-        "criteria": [
-          "Score 0: Puramente teorica, nessun exploit",
-          "Score 1: Esiste un Proof of Concept ma non è funzionale",
-          "Score 2: Exploit pubblico disponibile ma richiede autenticazione o setup complesso",
-          "Score 3: Sfruttamento attivo 'in the wild' senza autenticazione"
+          "0: Ambiente di test o sviluppo senza impatto sul business",
+          "1: Servizio interno secondario",
+          "2: Servizio operativo importante ma con alternative temporanee",
+          "3: Asset mission critical che genera fatturato diretto e blocca il business se indisponibile"
         ]
       }
     }
   },
   {
-    "state": "Allarme SIEM: Rilevata massiccia scansione delle porte su server interno. L'indagine ha confermato che l'IP sorgente appartiene allo scanner di vulnerabilità aziendale (Falso Positivo).",
+    "titolo": "3. Tipo NOUL — Decisione binaria Sì/No",
+    "spiegazione": "Restituisce la probabilità da 0.00 (No) a 1.00 (Sì) per una domanda chiusa.",
+    "state": "Allarme SIEM: Rilevata scansione massiccia delle porte verso i server interni. La verifica sull'IP sorgente ha confermato che il traffico proviene dallo scanner di vulnerabilità autorizzato del team IT durante la finestra di manutenzione programmata.",
     "questions": {
       "falso_positivo": {
         "type": "noul",
-        "instructions": "L'evento è un falso positivo generato da un'attività autorizzata?"
+        "instructions": "L'allarme è un falso positivo causato da un'attività interna autorizzata?"
       },
-      "richiede_mitigazione": {
+      "attacco_esterno": {
         "type": "noul",
-        "instructions": "È necessario applicare azioni di mitigazione tecnica sull'asset coinvolto?"
+        "instructions": "Il traffico proviene da un attaccante esterno non autorizzato?"
       },
-      "chiudere_ticket": {
+      "richiede_intervento_emergenza": {
         "type": "noul",
-        "instructions": "Il ticket può essere chiuso direttamente senza ulteriori indagini?"
+        "instructions": "È necessario isolare immediatamente i server dalla rete per un incidente di sicurezza?"
       }
     }
   }
