@@ -1,21 +1,25 @@
 import json
 import laya
 
-# Carica prompt e casi di test dal file JSON
 with open("prompts.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
+    scenarios = json.load(f)
 
 print("Caricamento modello multilingue (al primo avvio scarica i pesi)...")
 agent = laya.Agent("convaiinnovations/laya-multilingual")
 
-for i, text in enumerate(data["test_cases"], 1):
+for i, item in enumerate(scenarios, 1):
     print(f"\n--- Caso {i} ---")
-    print(f"Input: {text}")
+    print(f"Input: {item['state']}")
     
-    out = agent.predict(text, data["questions"])
+    out = agent.predict(item["state"], item["questions"])
     
     for q_name, ans in out["answers"].items():
-        # Estrae la risposta principale in base al tipo (choice, score o noul)
-        valore = ans.get("choice") or ans.get("score") or f"{ans.get('noul'):.2f}"
+        if ans.get("choice") is not None:
+            valore = ans["choice"]
+        elif ans.get("score") is not None:
+            valore = ans["score"]
+        else:
+            valore = f"{ans.get('noul'):.2f}"
+            
         route = ans.get("route", "n/a")
         print(f"  • {q_name}: {valore}  [azione consigliata: {route}]")
